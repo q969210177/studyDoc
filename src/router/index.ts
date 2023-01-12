@@ -1,6 +1,7 @@
+// import { el } from "element-plus/es/locale";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import loginView from "../views/loginView.vue";
-import layoutView from "../views/loginView.vue";
+import layoutView from "../views/layoutView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,6 +13,13 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "layout",
     component: layoutView,
+    // children: [
+    //   {
+    //     path: "chartPage/chartPageIndex",
+    //     name: "chartPageIndex",
+    //     component: import("@/views/chartPage/chartPageIndex.vue"),
+    //   },
+    // ],
   },
   // {
   //   path: "/about",
@@ -28,9 +36,20 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-router.beforeEach((to, form, next) => {
-  console.log(to, form);
+// router.beforeEach((to, form, next) => {
+//   console.log(to);
+//   const token = window.sessionStorage.getItem("token");
+//   if (token) {
+//     next();
+//   } else {
+//     console.log(form.fullPath);
 
-  next();
-});
+//     if (to.path === "/login") {
+//       console.log(to.path === "/login");
+//     } else {
+//       next("/login");
+//     }
+//   }
+//   // next();
+// });
 export default router;

@@ -36,17 +36,20 @@
 <script lang="ts" setup>
 import { ref, Ref, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { addRouterArr } from "@/globalData/addRouter";
 import type { FormInstance, FormRules, InputInstance } from "element-plus";
+import type { IRouterItem } from "@/globalData/addRouter";
 interface ILoginParams {
   userName: string;
   passWord: string;
 }
 const router = useRouter();
+
 const ruleFormRef = ref<FormInstance>();
 const userNameRef = ref<InputInstance>();
 const loginParams: Ref<ILoginParams> = ref({
-  userName: "",
-  passWord: "",
+  userName: "admin",
+  passWord: "admin123",
 });
 const rules = reactive<FormRules>({
   userName: [
@@ -59,12 +62,22 @@ const rules = reactive<FormRules>({
   ],
 });
 function onSubmit() {
+  // router.push("/layout");
+  router.push("/");
   if (!ruleFormRef.value) return;
-  console.log(ruleFormRef.value);
   ruleFormRef.value.validate((validate: boolean) => {
     if (validate) {
-      // router.addRoute("layout");
-      router.push("/");
+      addRouterArr.forEach((v: IRouterItem) => {
+        const obj: any = {
+          path: v.path,
+          name: v.name,
+          component: () => import(v.component),
+        };
+        // obj.component = () => import(`${v.component}`);
+        console.log(obj);
+        router.addRoute("/", obj);
+      });
+      router.push("/chartPage/chartPageIndex");
     }
   });
   //
