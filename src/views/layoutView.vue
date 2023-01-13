@@ -10,7 +10,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-console.log(import("@/views/chartPage/chartPageIndex.vue"));
+// console.log(import("@/views/chartPage/chartPageIndex.vue"));
 </script>
 <style lang="scss" scoped>
 @import "~@/assets/style/layout.scss";

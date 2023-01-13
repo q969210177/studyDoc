@@ -34,6 +34,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import layoutView from "./layoutView.vue";
 import { ref, Ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { addRouterArr } from "@/globalData/addRouter";
@@ -61,22 +62,41 @@ const rules = reactive<FormRules>({
     { min: 6, max: 15, message: "密码长度在6-15个字符之间", trigger: "blur" },
   ],
 });
+const loadView = (view: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  console.log(require(`@/views/${view}`));
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    return require(`@/views/${view}`).default;
+  } else {
+    // 使用 import 实现生产环境的路由懒加载
+    return () => import(`@/views/${view}`);
+  }
+};
 function onSubmit() {
   // router.push("/layout");
   router.push("/");
   if (!ruleFormRef.value) return;
+  // const layoutObj = {
+  //   path: "/index",
+  //   name: "layout",
+  //   component: layoutView,
+  //   children: [],
+  // };
   ruleFormRef.value.validate((validate: boolean) => {
     if (validate) {
       addRouterArr.forEach((v: IRouterItem) => {
         const obj: any = {
           path: v.path,
           name: v.name,
-          component: () => import(v.component),
+          component: loadView(`${v.component}`),
         };
-        // obj.component = () => import(`${v.component}`);
         console.log(obj);
-        router.addRoute("/", obj);
+
+        router.addRoute("layout", obj);
       });
+      console.log(router);
+      // router.replace(router.currentRoute.value.fullPath);
       router.push("/chartPage/chartPageIndex");
     }
   });
