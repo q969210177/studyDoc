@@ -1,2 +1,0 @@
-export * from "/Users/chenxi/Desktop/Chen/photography-take-orders/internal/tailwind-config/src/index.js";
-export { default } from "/Users/chenxi/Desktop/Chen/photography-take-orders/internal/tailwind-config/src/index.js";
