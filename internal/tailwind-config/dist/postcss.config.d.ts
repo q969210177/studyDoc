@@ -1,0 +1,2 @@
+export * from "/Users/chenxi/Desktop/Chen/photography-take-orders/internal/tailwind-config/src/postcss.config.js";
+export { default } from "/Users/chenxi/Desktop/Chen/photography-take-orders/internal/tailwind-config/src/postcss.config.js";
