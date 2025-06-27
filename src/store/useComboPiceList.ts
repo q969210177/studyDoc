@@ -1,6 +1,7 @@
 import type { IComboPiceItem } from "@/type/store/ComboPiceType";
 import { nanoid } from "nanoid";
 
+// 价格表的数据
 export const useComboPiceList = defineStore(
   "ComboPiceList",
   () => {

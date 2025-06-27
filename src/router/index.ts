@@ -2,6 +2,7 @@ import NProgress from "nprogress";
 import { createRouter, createWebHashHistory } from "vue-router";
 import BasicLayout from "@/layout/basic.vue";
 import { useAccessStore } from "@/store/useAccessStore";
+import listRoutes from "./routes/modules/list";
 
 /**
  *  @zh_CN 创建vue-router实例
@@ -26,14 +27,8 @@ const router = createRouter({
       },
       name: "Root",
       path: "/",
-      redirect: "/acglist",
-      children: [
-        {
-          path: "/acglist",
-          component: () => import("@/views/ACGList/acgList.vue"),
-        },
-      ],
-      // children: [...dynamicRoutes, ...staticRoutes],
+      redirect: "/index",
+      children: [...listRoutes],
     },
   ],
   scrollBehavior: (to, _from, savedPosition) => {
@@ -87,4 +82,6 @@ router.beforeEach((to, from, next) => {
   NProgress.done();
   next();
 });
+console.log(router, "router");
+
 export { router };

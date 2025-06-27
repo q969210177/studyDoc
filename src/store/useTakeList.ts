@@ -20,13 +20,13 @@ export const useTakeList = defineStore(
     //   );
     // }
     return {
-    //   acgList,
-    //   addACG,
-    //   removeACG,
-    //   updateACG,
+      //   acgList,
+      //   addACG,
+      //   removeACG,
+      //   updateACG,
     };
   },
   {
     persist: true,
-  },
+  }
 );

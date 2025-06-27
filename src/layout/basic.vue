@@ -4,18 +4,14 @@ import { RouterView } from "vue-router";
 import { useAccessStore } from "@/store/useAccessStore";
 
 defineOptions({ name: "LayoutContent" });
-
-const { isLogin } = useAccessStore();
 </script>
 
 <template>
   <div class="basic">
     <div class="container">
       <div class="header">111</div>
-      <div class="header-left">
-        <div class="header-left-logo">
-          <!-- <img src="@/assets/logo.png" alt="logo" /> -->
-        </div>
+      <div class="body">
+        <RouterView />
       </div>
     </div>
   </div>

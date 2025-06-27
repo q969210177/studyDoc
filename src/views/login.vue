@@ -1,62 +1,80 @@
 <script lang="ts" setup>
-const formData = reactive({
+import type { FormInstanceFunctions } from "tdesign-mobile-vue";
+import type { IAccessUserInfo } from "@/type/store/AccessStore";
+import { useAccessStore } from "@/store/useAccessStore";
+
+const { login } = useAccessStore();
+const formData = reactive<IAccessUserInfo>({
   name: "",
-  password: "",
-  gender: "",
-  birth: "",
-  place: "",
-  age: 3,
-  description: 2,
-  resume: "",
+  cn: "",
+  qq: "",
 });
-const FormRef = ref(null);
+const FormRef = ref<FormInstanceFunctions | null>(null);
 const rules = {
-  name: [
+  cn: [
     {
-      validator: (val: any) => val.length === 8,
-      message: "只能输入8个字符英文",
+      min: 1,
+      required: true,
+      max: 8,
+      message: "长度大于1个字符小于8个字符",
     },
   ],
-  password: [
-    { validator: (val: any) => val.length > 6, message: "长度大于6个字符" },
+  qq: [
+    {
+      required: true,
+      min: 5,
+      max: 11,
+      message: "长度大于5个字符小于11个字符",
+    },
   ],
-  gender: [{ validator: (val: any) => val !== "", message: "不能为空" }],
-  birth: [{ validator: (val: any) => val !== "", message: "不能为空" }],
-  place: [{ validator: (val: any) => val !== "", message: "不能为空" }],
-  description: [
-    { validator: (val: any) => val > 3, message: "分数过低会影响整体评价" },
-  ],
-  resume: [{ validator: (val: any) => val !== "", message: "不能为空" }],
 };
+async function handleLogin() {
+  const status = await FormRef.value?.validate();
+  console.log(status, "status");
+
+  if (status) {
+    await login(formData);
+  }
+}
 </script>
 
 <template>
   <div class="login flex">
-    <div class="login-box mt-80px h-300px w-full p-20px">
-      <t-form
-        ref="FormRef"
-        :data="formData"
-        :rules="rules"
-        reset-type="initial"
-        show-error-message
-        label-align="top"
-        scroll-to-first-error="auto"
-      >
-        <t-form-item label="用户名" name="name" help="输入cn">
-          <t-input
-            v-model="formData.name"
-            borderless
-            placeholder="请输入内容"
-          />
-        </t-form-item>
-        <t-form-item label="用户名" name="name" help="输入qq">
-          <t-input
-            v-model="formData.name"
-            borderless
-            placeholder="请输入内容"
-          />
-        </t-form-item>
-      </t-form>
+    <div class="login_box mt-80px h-300px w-full flex flex-col p-20px">
+      <div class="form_box flex-1">
+        <t-form
+          ref="FormRef"
+          :data="formData"
+          :rules="rules"
+          reset-type="initial"
+          show-error-message
+          label-align="left"
+          :label-width="0"
+          scroll-to-first-error="auto"
+        >
+          <t-form-item label="" name="cn">
+            <t-input
+              v-model="formData.cn"
+              borderless
+              placeholder="请输入cn或者名字"
+            />
+          </t-form-item>
+          <t-form-item label="" name="qq">
+            <t-input v-model="formData.qq" borderless placeholder="请输入qq" />
+          </t-form-item>
+        </t-form>
+      </div>
+      <div class="operation_box">
+        <t-button
+          block
+          size="large"
+          theme="primary"
+          type="button"
+          @click="handleLogin"
+        >
+          登录
+        </t-button>
+      </div>
     </div>
   </div>
 </template>
