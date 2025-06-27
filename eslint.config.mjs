@@ -29,14 +29,14 @@ export default antfu({
     "style/member-delimiter-style": ["off"],
     "vue/require-explicit-emits": ["error"],
     "vue/component-definition-name-casing": ["error", "PascalCase"],
-    "vue/component-name-in-template-casing": [
-      "error",
-      "PascalCase",
-      {
-        registeredComponentsOnly: false,
-        ignores: ["slot"],
-      },
-    ],
+    // "vue/component-name-in-template-casing": [
+    //   "error",
+    //   "PascalCase",
+    //   {
+    //     registeredComponentsOnly: false,
+    //     ignores: ["slot", "router-view"],
+    //   },
+    // ],
     "vue/custom-event-name-casing": [
       "error",
       "kebab-case",

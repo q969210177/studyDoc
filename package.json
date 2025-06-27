@@ -10,15 +10,19 @@
   },
   "dependencies": {
     "nanoid": "^5.1.5",
+    "nprogress": "^0.2.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.3.0",
-    "vue": "^3.5.17"
+    "tdesign-mobile-vue": "^1.9.1",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.9.2",
     "@eslint/js": "^9.7.0",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.9.1",
+    "@types/nprogress": "^0.2.3",
     "@types/uni-app": "^1.4.8",
     "@uni-helper/uni-app-types": "1.0.0-alpha.6",
     "@uni-helper/uni-ui-types": "1.0.0-alpha.6",
