@@ -14,6 +14,16 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    name: "StrokeList",
+    path: "/strokelist",
+    component: () => import("@/views/StrokeList/strokeList.vue"),
+    meta: {
+      affixTab: true,
+      icon: "lucide:area-chart",
+      title: "page.dashboard.analytics",
+    },
+  },
+  {
     name: "Index",
     path: "/index",
     component: () => import("@/views/index.vue"),

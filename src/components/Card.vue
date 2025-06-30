@@ -18,7 +18,16 @@ defineProps<{
     <div class="p-4">
       <!-- 标题 -->
       <h3 v-if="$slots.title || title" class="text-lg font-semibold mb-2">
-        <slot name="title">{{ title }}</slot>
+        <slot name="header">
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <slot name="title">{{ title }}</slot>
+            </div>
+            <div class="flex-1 text-right">
+              <slot name="extra" />
+            </div>
+          </div>
+        </slot>
       </h3>
 
       <!-- 正文 -->

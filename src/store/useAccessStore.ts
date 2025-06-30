@@ -1,4 +1,4 @@
-import type { IAccessUserInfo } from "@/type/store/AccessStore";
+import type { IAccessUserInfo } from "@/type/store/AccessStoreType";
 import { router } from "@/router";
 
 export const useAccessStore = defineStore(

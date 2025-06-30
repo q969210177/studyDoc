@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { FormInstanceFunctions } from "tdesign-mobile-vue";
-import type { IAccessUserInfo } from "@/type/store/AccessStore";
+import type { IAccessUserInfo } from "@/type/store/AccessStoreType";
 import { useAccessStore } from "@/store/useAccessStore";
 
 const { login } = useAccessStore();
