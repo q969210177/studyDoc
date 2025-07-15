@@ -1,65 +1,23 @@
 <script lang="ts" setup>
-import StrokeForm from "./components/StrokeForm.vue";
-const MAX_DATA_LEN = 60;
+import { useRouter } from 'vue-router';
+import { useStrokeList, } from "@/views/StrokeList/hooks/useStrokeList";
 
-function loadData(data: any, isRefresh?: boolean) {
-  const ONCE_LOAD_NUM = 20;
+const { delStrokeList, strokeList, loading } = useStrokeList()
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const temp = [];
-      for (let i = 0; i < ONCE_LOAD_NUM; i++) {
-        if (isRefresh) {
-          temp.push(`${i + 1}`);
-        } else {
-          temp.push(`${data.value.length + 1 + i}`);
-        }
-      }
-
-      if (isRefresh) {
-        data.value = temp;
-      } else {
-        data.value.push(...temp);
-      }
-
-      resolve(data);
-    }, 1000);
-  });
-}
-
-const listPull = ref([] as Array<any>);
-const loading = ref("");
-const refreshing = ref(false);
-const popupVisible = ref(false);
-function onLoadPull(isRefresh?: boolean) {
-  if ((listPull.value.length >= MAX_DATA_LEN && !isRefresh) || loading.value) {
-    return;
+const router = useRouter()
+function handleOperClick(type: "add" | "edit", data: any = null) {
+  const query = {
+    type,
+    id: undefined
   }
-  loading.value = "loading";
-  loadData(listPull, isRefresh).then(() => {
-    loading.value = "";
-    refreshing.value = false;
-  });
-}
-
-function onScroll(scrollBottom: number) {
-  if (scrollBottom < 50) {
-    onLoadPull();
-  }
-}
-
-function onRefresh() {
-  refreshing.value = true;
-  onLoadPull(true);
-}
-function handleOpenPopup(type: "add" | "edit", data: any = null) {
-  popupVisible.value = true;
   if (type === "edit") {
     console.log(data);
+    query.id = data.id
   }
+  router.push({ path: "/strokeForm", query })
 }
 onMounted(() => {
-  onLoadPull();
+  // handleGetList()
 });
 </script>
 
@@ -71,23 +29,20 @@ onMounted(() => {
           theme="primary"
           type="button"
           size="small"
-          @click="handleOpenPopup('add')"
+          @click="handleOperClick('add')"
         >
-          添加行程
+          创建行程
         </t-button>
       </div>
     </div>
-    <t-popup v-model="popupVisible" placement="bottom" destroy-on-close>
-      <StrokeForm />
-    </t-popup>
 
-    <t-pull-down-refresh v-model="refreshing" @refresh="onRefresh">
-      <t-list :async-loading="loading" @scroll="onScroll">
-        <t-cell v-for="item in listPull" :key="item" align="middle">
-          <span class="cell">{{ item }}</span>
-        </t-cell>
-      </t-list>
-    </t-pull-down-refresh>
+    <t-list :async-loading="loading">
+      <t-cell v-for="item in strokeList" :key="item" :title="item.name" align="middle">
+        <t-link @click="delStrokeList(item.id)">
+          删除
+        </t-link>
+      </t-cell>
+    </t-list>
   </div>
 </template>
 

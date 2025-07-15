@@ -9,7 +9,9 @@ defineOptions({ name: "LayoutContent" });
 <template>
   <div class="basic">
     <div class="container">
-      <div class="header">111</div>
+      <div class="header">
+        <!-- 111 -->
+      </div>
       <div class="body">
         <RouterView />
       </div>
@@ -26,11 +28,9 @@ $header-height: 40px;
     margin: 0 auto;
     max-width: 750px;
     height: 100%;
-    border: 1px solid red;
     .header {
       width: 100%;
       height: $header-height;
-      background-color: #000;
     }
     .body {
       width: 100%;

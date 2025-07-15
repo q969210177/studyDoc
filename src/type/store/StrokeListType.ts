@@ -1,11 +1,7 @@
 export interface IStrokeListItem {
-  id: string;
+  id?: string;
   name: string;
-  price: number;
-}
-export interface IStrokeListPage {
-  page: number;
-  pageSize: number;
-  total: number;
-  list: IStrokeListItem[];
+  startTime: string;
+  endTime: string;
+  timeDiff: number;
 }

@@ -24,6 +24,16 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    name: "StrokeForm",
+    path: "/strokeForm",
+    component: () => import("@/views/StrokeList/strokeForm.vue"),
+    meta: {
+      affixTab: true,
+      icon: "lucide:area-chart",
+      title: "page.dashboard.analytics",
+    },
+  },
+  {
     name: "Index",
     path: "/index",
     component: () => import("@/views/index.vue"),
